@@ -6,6 +6,7 @@
   "tags": [],
   "targets": {
     "build": {
+      "dependsOn": ["generate-prisma-types"],
       "executor": "nx:run-commands",
       "options": {
         "command": "webpack-cli build",
@@ -66,7 +67,7 @@
         "passWithNoTests": true
       }
     },
-    "generate-types-prisma": {
+    "generate-prisma-types": {
       "command": "prisma generate",
       "options": {
         "cwd": "apps/jobber-auth",
