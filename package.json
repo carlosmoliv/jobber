@@ -2,7 +2,9 @@
   "name": "@jobber/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky"
+  },
   "private": true,
   "dependencies": {
     "@apollo/server": "^5.5.0",
@@ -46,9 +48,11 @@
     "@types/node": "20.19.9",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
+    "husky": "^9.1.7",
     "jest": "^30.0.2",
     "jest-environment-node": "^30.0.2",
     "jest-util": "^30.0.2",
+    "lint-staged": "^16.4.0",
     "nx": "22.6.4",
     "prettier": "~3.6.2",
     "prisma": "^7.7.0",
