@@ -34,6 +34,6 @@ jobs:
       - name: Generate Prisma Client
         run: npx nx generate-prisma-types jobber-auth
         env:
-          AUTH_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/jobber-auth?schema=public'
+          DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/jobber-auth?schema=public'
 
       - run: npx nx affected -t lint test build
