@@ -64,7 +64,8 @@
     },
     "test": {
       "options": {
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "dependsOn": ["generate-prisma-types"]
       }
     },
     "generate-prisma-types": {
