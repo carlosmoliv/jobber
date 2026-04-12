@@ -13,4 +13,8 @@ export class UsersService {
       data: { ...data, password: hashedPassword },
     });
   }
+
+  async getUsers() {
+    return this.prismaService.user.findMany();
+  }
 }
