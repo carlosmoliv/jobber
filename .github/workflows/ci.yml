@@ -26,6 +26,6 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
 
       - name: Generate Prisma Client
-        run: npx nx run jobber-auth:generate-prisma-types
+        run: npx nx generate-prisma-types jobber-auth
 
       - run: npx nx affected -t lint test build
