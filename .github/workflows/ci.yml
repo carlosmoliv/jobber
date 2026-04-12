@@ -29,7 +29,7 @@ jobs:
         uses: docker/setup-compose-action@v1
 
       - name: Start PostgreSQL Service
-        run: docker-compose up -d
+        run: docker compose up -d
 
       - name: Generate Prisma Client
         run: npx nx generate-prisma-types jobber-auth
