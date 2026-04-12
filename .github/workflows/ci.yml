@@ -25,7 +25,15 @@ jobs:
       - run: npm ci --legacy-peer-deps
       - uses: nrwl/nx-set-shas@v4
 
+      - name: Install Docker Compose
+        uses: docker/setup-compose-action@v1
+
+      - name: Start PostgreSQL Service
+        run: docker-compose up -d
+
       - name: Generate Prisma Client
         run: npx nx generate-prisma-types jobber-auth
+        env:
+          AUTH_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/jobber-auth?schema=public'
 
       - run: npx nx affected -t lint test build
