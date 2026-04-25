@@ -1,7 +1,7 @@
 {
   "name": "jobber-jobs",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "jobber-jobs/src",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/jobber-jobs/src",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -10,7 +10,7 @@
       "options": {
         "command": "webpack-cli build",
         "args": ["--node-env=production"],
-        "cwd": "jobber-jobs"
+        "cwd": "apps/jobber-jobs"
       },
       "configurations": {
         "development": {
