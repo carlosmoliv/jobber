@@ -4,6 +4,8 @@ import { UsersService } from './users.service';
 import { CreateUserInput } from './dto/create-user.input';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { CurrentUser } from '../auth/current-user.decorator';
+import { TokenPayload } from '../auth/interfaces/token-payload.interface';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -18,7 +20,8 @@ export class UsersResolver {
 
   @UseGuards(GqlAuthGuard)
   @Query(() => [User], { name: 'users' })
-  async getUsers(): Promise<User[]> {
+  async getUsers(@CurrentUser() { userId }: TokenPayload): Promise<User[]> {
+    console.log('Current user ID:', userId);
     return this.usersService.getUsers();
   }
 }
