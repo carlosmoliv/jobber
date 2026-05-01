@@ -1,21 +1,35 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import {
   DiscoveredClassWithMeta,
   DiscoveryService,
 } from '@golevelup/nestjs-discovery';
 import { JOB_METADATA_KEY } from '../decorators/job.decorator';
 import { AbstractJob } from './job';
+import { JobMetadata } from '../interfaces/job-metadata.interface';
 
 @Injectable()
 export class JobsService implements OnModuleInit {
-  private jobs: DiscoveredClassWithMeta<AbstractJob>[] = [];
+  private jobs: DiscoveredClassWithMeta<JobMetadata>[] = [];
 
   constructor(private readonly discoveryService: DiscoveryService) {}
 
   async onModuleInit() {
     this.jobs =
-      await this.discoveryService.providersWithMetaAtKey<AbstractJob>(
+      await this.discoveryService.providersWithMetaAtKey<JobMetadata>(
         JOB_METADATA_KEY,
       );
+  }
+
+  getJobs() {
+    return this.jobs.map((job) => job.meta);
+  }
+
+  async executeJob(name: string) {
+    const job = this.jobs.find((job) => job.meta.name === name);
+    if (!job) {
+      throw new NotFoundException(`Job with name ${name} not found`);
+    }
+    await (job.discoveredClass.instance as AbstractJob).execute();
+    return job.meta;
   }
 }
