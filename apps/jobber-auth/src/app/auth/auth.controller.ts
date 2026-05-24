@@ -15,6 +15,7 @@ export class AuthController implements AuthServiceController {
   authenticate(
     request: AuthenticateRequest,
   ): Promise<User> | Observable<User> | User {
+    console.log('Received authentication request:', request);
     return {} as User;
   }
 }
