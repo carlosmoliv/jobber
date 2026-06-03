@@ -4,7 +4,7 @@ import {
   DiscoveryService,
 } from '@golevelup/nestjs-discovery';
 import { JOB_METADATA_KEY } from '../decorators/job.decorator';
-import { AbstractJob } from './job';
+import { AbstractJob } from './abstract.job';
 import { JobMetadata } from '../interfaces/job-metadata.interface';
 
 @Injectable()
