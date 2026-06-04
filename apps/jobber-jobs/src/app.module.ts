@@ -8,7 +8,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 @Module({
   imports: [
-    ConfigModule,
+    ConfigModule.forRoot({ isGlobal: true }),
     JobsModule,
     DiscoveryModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({

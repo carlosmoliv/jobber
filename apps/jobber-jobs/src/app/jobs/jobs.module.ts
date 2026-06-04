@@ -1,6 +1,7 @@
 import { join } from 'path';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { Module } from '@nestjs/common';
+import { PulsarModule } from '@jobber/pulsar';
 import { FibonacciJob } from './fibonacci.job';
 import { DiscoveryModule } from '@nestjs/core';
 import { JobsResolver } from './jobs.resolver';
@@ -12,6 +13,7 @@ import { AUTH_PACKAGE_NAME } from 'types/proto/auth';
 @Module({
   imports: [
     DiscoveryModule,
+    PulsarModule,
     ClientsModule.register([
       {
         name: AUTH_PACKAGE_NAME,
