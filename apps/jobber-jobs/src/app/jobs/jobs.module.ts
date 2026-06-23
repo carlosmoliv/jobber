@@ -2,7 +2,7 @@ import { join } from 'path';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { Module } from '@nestjs/common';
 import { PulsarModule } from '@jobber/pulsar';
-import { FibonacciJob } from './fibonacci.job';
+import { FibonacciJob } from './fibonacci/fibonacci.job';
 import { DiscoveryModule } from '@nestjs/core';
 import { JobsResolver } from './jobs.resolver';
 import { JobsService } from './jobs.service';

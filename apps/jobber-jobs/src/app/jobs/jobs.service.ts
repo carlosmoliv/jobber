@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+  OnModuleInit,
+} from '@nestjs/common';
 import {
   DiscoveredClassWithMeta,
   DiscoveryService,
@@ -29,10 +34,12 @@ export class JobsService implements OnModuleInit {
     if (!job) {
       throw new NotFoundException(`Job with name ${name} not found`);
     }
-    await (job.discoveredClass.instance as AbstractJob).execute(
-      {},
-      job.meta.name,
-    );
+    if (!(job.discoveredClass.instance instanceof AbstractJob)) {
+      throw new InternalServerErrorException(
+        'Job is not an instance of AbstractoOb',
+      );
+    }
+    await job.discoveredClass.instance.execute({}, job.meta.name);
     return job.meta;
   }
 }

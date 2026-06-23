@@ -8,16 +8,16 @@ import {
   AuthServiceControllerMethods,
   User,
 } from 'types/proto/auth';
-import { GqlAuthGuard } from './guards/gql-auth.guard';
 import { UsersService } from '../users/users.service';
 import { TokenPayload } from './interfaces/token-payload.interface';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
 @Controller()
 @AuthServiceControllerMethods()
 export class AuthController implements AuthServiceController {
   constructor(private readonly usersService: UsersService) {}
 
-  @UseGuards(GqlAuthGuard)
+  @UseGuards(JwtAuthGuard)
   authenticate(
     request: AuthenticateRequest & { user: TokenPayload },
   ): Promise<User> | Observable<User> | User {
