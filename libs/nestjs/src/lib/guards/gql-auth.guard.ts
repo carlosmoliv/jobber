@@ -21,7 +21,7 @@ import {
 @Injectable()
 export class GqlAuthGuard implements CanActivate, OnModuleInit {
   private readonly logger = new Logger(GqlAuthGuard.name);
-  private authService: AuthServiceClient | undefined;
+  private authService!: AuthServiceClient;
 
   constructor(@Inject(AUTH_PACKAGE_NAME) private client: ClientGrpc) {}
 
@@ -33,8 +33,6 @@ export class GqlAuthGuard implements CanActivate, OnModuleInit {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    if (!this.authService) return false;
-
     const token = this.getRequest(context).cookies?.Authentication;
     if (!token) return false;
 
